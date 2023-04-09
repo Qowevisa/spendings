@@ -46,7 +46,9 @@ defmodule SpendingsWeb.IncomeLive do
                 end
               end
             )
-            assign(socket, :incomes, updated_incomes)
+            socket
+            |> assign(:incomes, updated_incomes)
+            |> assign(:changeset, Income.changeset(%Income{}))
         end
 
       {:noreply, socket}

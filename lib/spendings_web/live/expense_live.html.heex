@@ -1,0 +1,39 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Value</th>
+      <th>Type</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for expense <- @expenses do %>
+      <tr>
+        <td><%= expense.id %></td>
+        <td><%= expense.value %></td>
+        <td><%= expense.type.name %></td>
+        <td>
+          <button phx-click="edit_expense" phx-value-id={expense.id}>Edit</button>
+          <button phx-click="delete_expense" phx-value-id={expense.id}>Delete</button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for @changeset, "#", [phx_submit: "add_expense"], fn f -> %>
+  <%= label f, :value %>
+  <%= number_input f, :value %>
+  <%= error_tag f, :value %>
+
+  <%= label f, :type_id %>
+  <%= select f, :type_id, Enum.map(@types, &{&1, &1}) %>
+  <%= error_tag f, :type_id %>
+
+  <%= if @changeset.data.id do %>
+    <button type="submit">Update Expense</button>
+  <% else %>
+    <button type="submit">Add Expense</button>
+  <% end %>
+<% end %>

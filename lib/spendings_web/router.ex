@@ -40,6 +40,7 @@ defmodule SpendingsWeb.Router do
 
       live "/types", SpendingsWeb.TypesLive
       live "/incomes", SpendingsWeb.IncomeLive
+      live "/expenses", SpendingsWeb.ExpenseLive
 
       live_dashboard "/dashboard", metrics: SpendingsWeb.Telemetry
     end
