@@ -1,0 +1,11 @@
+<%= form_for @changeset, "#", [phx_submit: "add_income"], fn f -> %>
+  <%= label f, :value %>
+  <%= number_input f, :value %>
+  <%= error_tag f, :value %>
+
+  <%= label f, :type %>
+  <%= text_input f, :type %>
+  <%= error_tag f, :type %>
+
+  <button type="submit">Add Income</button>
+<% end %>
