@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for type <- @types do %>
+      <tr>
+        <td><%= type.id %></td>
+        <td><%= type.name %></td>
+        <td>
+          <!-- Corrected attribute syntax below -->
+          <button phx-click="delete_type" phx-value-id={type.id}>Delete</button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for @changeset, "#", [phx_submit: "add_type"], fn f -> %>
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+
+  <button type="submit">Add Type</button>
+<% end %>

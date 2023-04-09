@@ -38,6 +38,7 @@ defmodule SpendingsWeb.Router do
     scope "/" do
       pipe_through :browser
 
+      live "/types", SpendingsWeb.TypesLive
       live "/incomes", SpendingsWeb.IncomeLive
 
       live_dashboard "/dashboard", metrics: SpendingsWeb.Telemetry
