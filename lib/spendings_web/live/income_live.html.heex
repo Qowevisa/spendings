@@ -14,7 +14,7 @@
         <td><%= income.value %></td>
         <td><%= income.type.name %></td>
         <td>
-          <!-- Corrected attribute syntax below -->
+          <button phx-click="edit_income" phx-value-id={income.id}>Edit</button>
           <button phx-click="delete_income" phx-value-id={income.id}>Delete</button>
         </td>
       </tr>
@@ -31,5 +31,9 @@
   <%= select f, :type_id, Enum.map(@types, &{&1, &1}) %>
   <%= error_tag f, :type_id %>
 
-  <button type="submit">Add Income</button>
+  <%= if @changeset.data.id do %>
+    <button type="submit">Update Income</button>
+  <% else %>
+    <button type="submit">Add Income</button>
+  <% end %>
 <% end %>
