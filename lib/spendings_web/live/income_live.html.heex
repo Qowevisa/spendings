@@ -12,7 +12,7 @@
       <tr>
         <td><%= income.id %></td>
         <td><%= income.value %></td>
-        <td><%= income.type %></td>
+        <td><%= income.type.name %></td>
         <td>
           <!-- Corrected attribute syntax below -->
           <button phx-click="delete_income" phx-value-id={income.id}>Delete</button>
@@ -27,9 +27,9 @@
   <%= number_input f, :value %>
   <%= error_tag f, :value %>
 
-  <%= label f, :type %>
-  <%= text_input f, :type %>
-  <%= error_tag f, :type %>
+  <%= label f, :type_id %>
+  <%= select f, :type_id, Enum.map(@types, &{&1, &1}) %>
+  <%= error_tag f, :type_id %>
 
   <button type="submit">Add Income</button>
 <% end %>

@@ -6,13 +6,13 @@ defmodule Spendings.Repo.Income do
 
   schema "incomes" do
     field :value, :integer
-    field :type, :string
+    belongs_to :type, Spendings.Repo.Type
 
     timestamps()
   end
 
   def changeset(part, params \\ %{}) do
     part
-    |> cast(params, [:value, :type])
+    |> cast(params, [:value, :type_id])
   end
 end
