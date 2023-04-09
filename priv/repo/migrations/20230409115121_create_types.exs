@@ -7,5 +7,7 @@ defmodule Spendings.Repo.Migrations.CreateTypes do
 
       timestamps()
     end
+
+    create unique_index(:types, [:name])
   end
 end
