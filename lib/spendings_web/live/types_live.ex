@@ -18,16 +18,24 @@ defmodule SpendingsWeb.TypesLive do
     changeset = Type.changeset(%Type{}, income_params)
 
     if changeset.valid? do
-      Repo.insert!(changeset)
+      case Repo.insert(changeset) do
+        {:ok, _type} ->
+          socket = socket
+          |> assign(:types, Repo.all(Type))
+          |> assign(:changeset, Type.changeset(%Type{}))
+          {:noreply, socket}
+        {:error, changeset} ->
+          {:noreply, assign(socket, :changeset, changeset)}
+      end
+    else
+      {:noreply, assign(socket, :changeset, changeset)}
     end
-
-    {:noreply, assign(socket, :types, Repo.all(Type))}
   end
 
   def handle_event("delete_type", %{"id" => id}, socket) do
     Repo.get(Type, id)
     |> Repo.delete()
 
-    {:noreply, assign(socket, :types, Repo.all(Income))}
+    {:noreply, assign(socket, :types, Repo.all(Type))}
   end
 end
