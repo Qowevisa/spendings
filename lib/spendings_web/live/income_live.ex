@@ -25,9 +25,8 @@ defmodule SpendingsWeb.IncomeLive do
   end
 
   def handle_event("delete_income", %{"id" => id}, socket) do
-
     Repo.get(Income, id)
-    |> Repo.delete
+    |> Repo.delete()
 
     {:noreply, assign(socket, :incomes, Repo.all(Income))}
   end
